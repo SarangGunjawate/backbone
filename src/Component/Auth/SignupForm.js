@@ -99,10 +99,6 @@ function SignupForm() {
             variant="standard"
             style={btnStyle}
           />
-          {/* <FormControlLabel
-            control={<Checkbox color="primary" name="checked" />}
-            label="I accept the terms and conditions"
-          /> */}
 
           <Box component="div">
             <FormControl style={{ width: "100%" }} variant="standard">
