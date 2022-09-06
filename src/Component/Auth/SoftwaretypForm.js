@@ -5,11 +5,80 @@ import {
   FormControl,
   TextField,
   TextareaAutosize,
-  Button
+  Button,
 } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 
-function SoftwaretypForm() {
+function SoftwaretypForm(props) {
+  const { submitDetails } = props;
+
+  // const ObjInitial = {
+  //   Name: {
+  //     value: "",
+  //     error: false,
+  //   },
+  //   Description: {
+  //     value: "",
+  //     error: false,
+  //   },
+  // };
+
+  // const [inputValues, setInputValue] = useState(ObjInitial);
+
+  // const handleOnSubmit = (event) => {
+  //   event.preventDefault();
+  //   const isValidForm = validateForm();
+
+  //   if (!isValidForm) {
+  //     //  error
+  //     submitDetails({
+  //       name: inputValues.Name.value,
+  //       description: inputValues.Description.value,
+  //     });
+  //   }
+
+  //   // Call API
+  // };
+
+  // const validateForm = () => {
+  //   let isError = false;
+  //   const currrentValues = { ...inputValues };
+
+  //   if (!inputValues.Name.value) {
+  //     isError = true;
+  //     currrentValues.Name.error = true;
+  //   }
+  //   if (!inputValues.Description.value) {
+  //     isError = true;
+  //     currrentValues.Description.error = true;
+  //   }
+
+  //   setInputValue({
+  //     ...currrentValues,
+  //   });
+  //   return isError;
+  // };
+
+  // const handleOnChange = (event) => {
+  //   const { name, value } = event.target;
+  //   let currentValues = inputValues[name];
+  //   console.log("event", currentValues);
+
+  //   if (!value) {
+  //     currentValues = {
+  //       error: true,
+  //       value: "",
+  //     };
+  //     setInputValue({ ...inputValues, [name]: currentValues });
+  //   } else if (name === "name") {
+  //     setInputValue({ ...inputValues, [name]: { value: value, error: true } });
+  //   } else {
+  //     currentValues.value = value;
+  //     currentValues.error = false;
+  //     setInputValue({ ...inputValues, [name]: currentValues });
+  //   }
+  // };
+
   return (
     <Box
       sx={{
@@ -46,7 +115,11 @@ function SoftwaretypForm() {
         >
           Add Computer Software Type
         </Typography>
-        <Grid container sx={{ width: "100%", alignSelf: "center", paddingBottom: 5 }} spacing={2}>
+        <Grid
+          container
+          sx={{ width: "100%", alignSelf: "center", paddingBottom: 5 }}
+          spacing={2}
+        >
           <Grid item align="center" md={12} sx={{ width: "100%" }}>
             <FormControl
               sx={{
@@ -55,7 +128,7 @@ function SoftwaretypForm() {
               }}
             >
               <TextField
-                name="Name"
+                name="name"
                 id="outlined-basic"
                 label="Name"
                 variant="outlined"
@@ -86,7 +159,6 @@ function SoftwaretypForm() {
                 // border: errors.cardContent ? '1px solid red' : 'none',
               }}
             />
-            
           </Grid>
           <Grid item align="center" md={12} sx={{ width: "100%" }}>
             <FormControl
@@ -116,13 +188,13 @@ function SoftwaretypForm() {
               />
             </FormControl>
           </Grid>
-          <Grid item align='center' md={12} sx={{ width: '100%' }}>
+          <Grid item align="center" md={12} sx={{ width: "100%" }}>
             <Button
-              aria-label='login'
-              variant='contained'
+              aria-label="login"
+              variant="contained"
               sx={{
-                width: '100%',
-                height: '50px',
+                width: "100%",
+                height: "50px",
                 mt: 4,
               }}
             >
