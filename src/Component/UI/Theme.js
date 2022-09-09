@@ -2,7 +2,7 @@ import { createTheme } from '@mui/material/styles';
 // import { purple } from '@mui/material/colors';
 
 const PRIMARY_COLOR = '#605CFF';
-const SECONDARY_COLOR = '#1A202C';
+const SECONDARY_COLOR = '#ffffff';
 
 export default createTheme({
   palette: {

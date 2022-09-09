@@ -9,11 +9,13 @@ import {
   Button,
   FormControl,
   FormGroup,
+  FormHelperText,
 } from "@material-ui/core";
 import Checkbox from "@mui/material/Checkbox";
 import { useNavigate } from "react-router-dom";
+import { isValidEmail } from "../../Utils/Helper";
 
-import React from "react";
+import React, { useState } from "react";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 
 function SignupForm() {
@@ -21,7 +23,7 @@ function SignupForm() {
 
   const paperStyle = {
     padding: "10px",
-    height: "85vh",
+    // height: "85vh",
     width: "450px",
     margin: "40px auto",
   };
@@ -36,15 +38,112 @@ function SignupForm() {
   const btnStyle = {
     margin: "6px 0",
   };
+
+  const [inputValues, setInputValue] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    userName: "",
+    password: "",
+    confirmPassword: "",
+    agree: false,
+  });
+
+  const [errors, setError] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    userName: "",
+    password: "",
+    confirmPassword: "",
+    agree: "",
+  });
+
+  const validateForm = (name, value) => {
+    switch (name) {
+      case "firstName":
+        if (!value || value.trim() === "") {
+          return "firstname is required";
+        } else {
+          return "";
+        }
+
+      case "lastName":
+        if (!value || value.trim() === "") {
+          return "lastname is required";
+        } else {
+          return "";
+        }
+
+      case "email":
+        if (!value) {
+          return "email is required";
+        } else if (!isValidEmail(value)) {
+          return "please enter valid email address";
+        } else {
+          return "";
+        }
+      case "userName":
+        if (!value || value.trim() === "") {
+          return "username is required";
+        } else {
+          return "";
+        }
+
+      case "password":
+        if (!value || value.trim() === "") {
+          return "password is required";
+        } else {
+          return "";
+        }
+
+      case "confirmPassword":
+        if (inputValues.password && value !== inputValues.password) {
+          return "Confirm password is not matched";
+        } else if (!value || value.trim() === "") {
+          return "please enter confirm password";
+        } else {
+          return "";
+        }
+
+      case "agree":
+        if (!value) {
+          return "Please accept terms and conditions";
+        } else {
+          return "";
+        }
+
+      default: {
+        return "";
+      }
+    }
+  };
+
+  const handleClick = (event) => {
+    event.preventDefault();
+  }
+
+  const handleOnChange = (event) => {
+    const { name } = event.target;
+
+    const value =
+      event.target.name === "agree" ? event.target.checked : event.target.value;
+
+    setError({ ...errors, [name]: validateForm(name, value) });
+    setInputValue({ ...inputValues, [name]: value });
+  };
+
   return (
     <Box>
-      <Box component={"form"}>
+      <Box component={"form"}
+        method='POST'
+      >
         <Paper elevation={10} style={paperStyle}>
           <Grid align="center">
             <Avatar style={avtarStyle}>
               <LockOutlinedIcon />
             </Avatar>
-            <h2>Sign in</h2>
+            <h2>Sign up</h2>
           </Grid>
           <TextField
             fullWidth
@@ -52,8 +151,13 @@ function SignupForm() {
             label="first name"
             placeholder="Enter First Name"
             type="text"
+            name="firstName"
             variant="standard"
             style={btnStyle}
+            onChange={handleOnChange}
+            helperText={errors.firstName}
+            value={inputValues.firstName.value}
+            error={errors.firstName ? true : false}
           />
           <TextField
             fullWidth
@@ -62,6 +166,11 @@ function SignupForm() {
             variant="standard"
             type="text"
             style={btnStyle}
+            name="lastName"
+            onChange={handleOnChange}
+            helperText={errors.lastName}
+            value={inputValues.lastName.value}
+            error={errors.lastName ? true : false}
           />
           <TextField
             fullWidth
@@ -71,6 +180,11 @@ function SignupForm() {
             type="text"
             variant="standard"
             style={btnStyle}
+            name="email"
+            onChange={handleOnChange}
+            helperText={errors.email}
+            value={inputValues.email.value}
+            error={errors.email ? true : false}
           />
           <TextField
             fullWidth
@@ -80,6 +194,11 @@ function SignupForm() {
             type="text"
             variant="standard"
             style={btnStyle}
+            name="userName"
+            onChange={handleOnChange}
+            helperText={errors.userName}
+            value={inputValues.userName.value}
+            error={errors.userName ? true : false}
           />
           <TextField
             fullWidth
@@ -89,6 +208,11 @@ function SignupForm() {
             type="Password"
             variant="standard"
             style={btnStyle}
+            name="password"
+            onChange={handleOnChange}
+            helperText={errors.password}
+            value={inputValues.password.value}
+            error={errors.password ? true : false}
           />
           <TextField
             fullWidth
@@ -98,6 +222,11 @@ function SignupForm() {
             type="text"
             variant="standard"
             style={btnStyle}
+            name="confirmPassword"
+            onChange={handleOnChange}
+            helperText={errors.confirmPassword}
+            value={inputValues.confirmPassword.value}
+            error={errors.confirmPassword ? true : false}
           />
 
           <Box component="div">
@@ -107,8 +236,8 @@ function SignupForm() {
                   sx={{ marginRight: 0 }}
                   control={
                     <Checkbox
-                      // checked={inputValues.agree}
-                      // onChange={handleOnChange}
+                      checked={inputValues.agree}
+                      onChange={handleOnChange}
                       name="agree"
                     />
                   }
@@ -148,9 +277,9 @@ function SignupForm() {
                 />
               </FormGroup>
             </FormControl>
-            {/* <FormHelperText error={errors.agree ? true : false}>
-                {errors.agree}
-              </FormHelperText> */}
+            <FormHelperText error={errors.agree ? true : false}>
+              {errors.agree}
+            </FormHelperText>
           </Box>
           <Button
             type="submit"
@@ -158,6 +287,7 @@ function SignupForm() {
             variant="contained"
             style={btnStyle}
             fullWidth
+            onClick={handleClick}
           >
             Create Account
           </Button>

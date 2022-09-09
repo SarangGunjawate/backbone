@@ -14,8 +14,8 @@ function Signin() {
       console.log('response', response)
 
       if (response.status === 200) {
-        saveAccessToken(response.data.data.access_token);
-        console.log('res',response.data.data.access_token)
+        saveAccessToken(response.data.access);
+        console.log('res',response.data.access)
       } else {
         console.log('error',response.error.message);
       }

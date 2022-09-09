@@ -12,72 +12,72 @@ import React, { useState } from "react";
 function SoftwaretypForm(props) {
   const { submitDetails } = props;
 
-  // const ObjInitial = {
-  //   Name: {
-  //     value: "",
-  //     error: false,
-  //   },
-  //   Description: {
-  //     value: "",
-  //     error: false,
-  //   },
-  // };
+  const ObjInitial = {
+    Name: {
+      value: "",
+      error: false,
+    },
+    Description: {
+      value: "",
+      error: false,
+    },
+  };
 
-  // const [inputValues, setInputValue] = useState(ObjInitial);
+  const [inputValues, setInputValue] = useState(ObjInitial);
 
-  // const handleOnSubmit = (event) => {
-  //   event.preventDefault();
-  //   const isValidForm = validateForm();
+  const handleOnSubmit = (event) => {
+    event.preventDefault();
+    const isValidForm = validateForm();
 
-  //   if (!isValidForm) {
-  //     //  error
-  //     submitDetails({
-  //       name: inputValues.Name.value,
-  //       description: inputValues.Description.value,
-  //     });
-  //   }
+    if (!isValidForm) {
+      //  error
+      submitDetails({
+        name: inputValues.Name.value,
+        description: inputValues.Description.value,
+      });
+    }
 
-  //   // Call API
-  // };
+    // Call API
+  };
 
-  // const validateForm = () => {
-  //   let isError = false;
-  //   const currrentValues = { ...inputValues };
+  const validateForm = () => {
+    let isError = false;
+    const currrentValues = { ...inputValues };
 
-  //   if (!inputValues.Name.value) {
-  //     isError = true;
-  //     currrentValues.Name.error = true;
-  //   }
-  //   if (!inputValues.Description.value) {
-  //     isError = true;
-  //     currrentValues.Description.error = true;
-  //   }
+    if (!inputValues.Name.value) {
+      isError = true;
+      currrentValues.Name.error = true;
+    }
+    if (!inputValues.Description.value) {
+      isError = true;
+      currrentValues.Description.error = true;
+    }
 
-  //   setInputValue({
-  //     ...currrentValues,
-  //   });
-  //   return isError;
-  // };
+    setInputValue({
+      ...currrentValues,
+    });
+    return isError;
+  };
 
-  // const handleOnChange = (event) => {
-  //   const { name, value } = event.target;
-  //   let currentValues = inputValues[name];
-  //   console.log("event", currentValues);
+  const handleOnChange = (event) => {
+    const { name, value } = event.target;
+    let currentValues = inputValues[name];
+    console.log("event", currentValues);
 
-  //   if (!value) {
-  //     currentValues = {
-  //       error: true,
-  //       value: "",
-  //     };
-  //     setInputValue({ ...inputValues, [name]: currentValues });
-  //   } else if (name === "name") {
-  //     setInputValue({ ...inputValues, [name]: { value: value, error: true } });
-  //   } else {
-  //     currentValues.value = value;
-  //     currentValues.error = false;
-  //     setInputValue({ ...inputValues, [name]: currentValues });
-  //   }
-  // };
+    if (!value) {
+      currentValues = {
+        error: true,
+        value: "",
+      };
+      setInputValue({ ...inputValues, [name]: currentValues });
+    } else if (name === "name") {
+      setInputValue({ ...inputValues, [name]: { value: value, error: true } });
+    } else {
+      currentValues.value = value;
+      currentValues.error = false;
+      setInputValue({ ...inputValues, [name]: currentValues });
+    }
+  };
 
   return (
     <Box
