@@ -11,10 +11,10 @@ const initialState = {
 };
 
 export const fetchSoftwareListDetails = createAsyncThunk(
-  "/Software/",
+  "/Software",
   async () => {
     const response = await fetchSoftwareList();
-    console.log("res", response);
+    console.log("res", response.data);
     return response.data;
   }
 );
@@ -30,13 +30,13 @@ export const softwareSlice = createSlice({
       })
 
       .addCase(fetchSoftwareListDetails.fulfilled, (state, action) => {
-        const payload = action.payload.Software;
-        console.log('payload', payload)
-        state.softList = payload.Software;
-        delete payload.Software;
-        state.isLoading = false;
-        // state.softwareList = action.payload.data;
+        // const payload = action.payload.Software;
+        // console.log('payload', payload)
+        // state.softList = payload.Software;
+        // delete payload.Software;
         // state.isLoading = false;
+        state.softList = action.payload.Software;
+        state.isLoading = false;
       })
 
       .addCase(fetchSoftwareListDetails.rejected, (state) => {

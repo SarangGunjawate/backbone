@@ -8,23 +8,19 @@ import WithLoader from '../HOC/WithLoader'
 function SoftwareListManager(props) {
     // const { setLoading } = props;
   const dispatch = useDispatch();
-  const softwareList = useSelector(getSoftwareList);
-  console.log('sss', softwareList)
-  const getStoreDetails = () => {
+  const geetingSoftList = useSelector(getSoftwareList);
+
+  useEffect(() => {
     dispatch(
       fetchSoftwareListDetails()
     )
-  };
-
-  useEffect(() => {
-    getStoreDetails();
   }, []);
 
 
   return (
     <div>
       <SoftwareList
-        softwareList={softwareList}
+        softList={geetingSoftList}
       />
     </div>
   );
