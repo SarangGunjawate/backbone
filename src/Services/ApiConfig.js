@@ -3,5 +3,5 @@ console.log('baseUrl', BaseURL)
 
 
 export const getSignInURL = () => `${BaseURL}/api/token/`
-export const getSoftwareTypeURL = () => 'http://192.168.0.178:8000/user';
-export const getSoftwareList = () => `${BaseURL}/Software/`;
+export const getSoftwareTypeURL = () => `${BaseURL}/Softwaretype/`;
+export const getSoftwareList = () => `${BaseURL}/software/`;

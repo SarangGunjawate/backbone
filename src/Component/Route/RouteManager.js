@@ -1,11 +1,11 @@
 import React from "react";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import ForgotPassword from "../Auth/ForgotPassword";
-import SoftwaretypForm from "../Auth/SoftwaretypForm";
 import WithLoader from "../HOC/WithLoader";
 import SigninPage from "../Pages/SigninPage";
 import SignupPage from "../Pages/SignupPage";
 import SoftwareListPage from "../Pages/SoftwareListPage";
+import SoftwareTypeListPage from "../Pages/SoftwareTypeListPage";
 import SoftwareTypePage from "../Pages/SoftwareTypePage";
 
 function RouteManager() {
@@ -18,6 +18,7 @@ function RouteManager() {
         <Route path="/forgotpass" element={<ForgotPassword />} />
         <Route path="/softwarelist" element={<SoftwareListPage />} />
         <Route path="/withLoader" element={<WithLoader />} />
+        <Route path="/softwaretypelist" element={<SoftwareTypeListPage />} />
       </Routes>
   );
 }

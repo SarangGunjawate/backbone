@@ -6,7 +6,7 @@ export const login = async (data) => {
     return await axiosInstance.post(getSignInURL(), JSON.stringify(data));
 }
 
-export const Softwaretyp = async (data, res) => {
-    console.log('data', data);
-    return await axiosInstance.post(getSoftwareTypeURL(), JSON.stringify(data));
+export const Softwaretyp = (parameters) => {
+    console.log('data', parameters);
+    return axiosInstance.post(getSoftwareTypeURL(), JSON.stringify(parameters));
 }
