@@ -2,8 +2,10 @@ import React from 'react'
 import SigninForm from '../Auth/SigninForm'
 import { login } from '../../Services/AuthService'
 import { saveAccessToken } from '../../Utils/Helper'
+import { useNavigate } from 'react-router-dom'
 
 function Signin() {
+  const navigate = useNavigate()
   console.log('start')
   const handleLogin = async (userDetails) => {
     console.log('userdetails', userDetails)
@@ -16,6 +18,7 @@ function Signin() {
       if (response.status === 200) {
         saveAccessToken(response.data.access);
         console.log('res',response.data.access)
+        navigate('/');
       } else {
         console.log('error',response.error.message);
       }

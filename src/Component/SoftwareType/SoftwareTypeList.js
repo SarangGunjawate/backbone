@@ -14,15 +14,25 @@ import {
   Button,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
+import {UserActions} from '../../Utils/Helper'
+import axios from "axios";
 import { useState, useEffect } from "react";
 
 function SoftwareTypeList(props) {
-  const { softTypeList } = props;
+  const { softTypeList, handleUserAction, selectedUser } = props;
   const list = Object.keys(softTypeList).map((key) => softTypeList[key]);
   const theme = useTheme();
-  const handleRemove = (id) => {
-        console.log('id', id)
-  }
+  // function handleRemove(id) {
+  //   axios.delete(`http://192.168.0.178:8000/Softwaretype/${id}`).then((res) => {
+  //     console.log(res);
+  //     console.log(res.data);
+
+  //     const obj = this.state.obj.filter((obj) => obj.id !== id);
+  //     this.setState({ obj });
+  //   });
+  //   alert("User Delete Successfully");
+  //   window.location.reload();
+  // }
   return (
     <Box
       sx={{
@@ -42,7 +52,7 @@ function SoftwareTypeList(props) {
           color: "black",
         }}
       >
-        Software List
+        Software Type List
       </Typography>
       <TableContainer component={Paper}>
         <Table
@@ -144,7 +154,8 @@ function SoftwareTypeList(props) {
                   align="center"
                 >
                   <Button
-                  onClick={() => handleRemove(obj.id)}
+                  onClick={() => handleUserAction(obj.id, UserActions.DELETE)}
+                  // onClick={() => handleRemove(obj.id)}
                     sx={{
                         backgroundColor: '#1f3d7a',
                         border: '1px solid green',

@@ -31,6 +31,7 @@ axiosInstance.interceptors.request.use(
 const axiosObj = {
   get: axiosInstance.get,
   post: (url, data, options) => axiosInstance.post(url, data, options),
+  delete: axiosInstance.delete,
 };
 
 export default axiosObj;
