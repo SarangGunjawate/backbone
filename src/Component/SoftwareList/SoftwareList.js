@@ -11,6 +11,7 @@ import {
   TableHead,
   Avatar,
   TablePagination,
+  Button
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { useState, useEffect } from "react";
@@ -54,12 +55,12 @@ function SoftwareList(props) {
             <TableRow >
               <TableCell sx={{color: 'black'}} align="center">computer_software_type</TableCell>
               <TableCell sx={{color: 'black'}} align="center">created_by</TableCell>
-              <TableCell sx={{color: 'black'}} align="center">created_on</TableCell>
               <TableCell sx={{color: 'black'}} align="center">discription</TableCell>
               <TableCell sx={{color: 'black'}} align="center">name</TableCell>
               <TableCell sx={{color: 'black'}} align="center">port_numbers</TableCell>
-              <TableCell sx={{color: 'black'}} align="center">updated_on</TableCell>
               <TableCell sx={{color: 'black'}} align="center">version</TableCell>
+              <TableCell sx={{color: 'black'}} align="center">Update</TableCell>
+              <TableCell sx={{color: 'black'}} align="center">Delete</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -92,12 +93,6 @@ function SoftwareList(props) {
                   sx={{ borderRadius: 15, px: 0.3, py: 0.3 }}
                   align="center"
                 >
-                  {obj.created_on}
-                </TableCell>
-                <TableCell
-                  sx={{ borderRadius: 15, px: 0.3, py: 0.3 }}
-                  align="center"
-                >
                   {obj.discription}
                 </TableCell>
                 <TableCell
@@ -116,13 +111,41 @@ function SoftwareList(props) {
                   sx={{ borderRadius: 15, px: 0.3, py: 0.3 }}
                   align="center"
                 >
-                  {obj.updated_on}
+                  {obj.version}
                 </TableCell>
                 <TableCell
                   sx={{ borderRadius: 15, px: 0.3, py: 0.3 }}
                   align="center"
                 >
-                  {obj.version}
+                  <Button
+                    sx={{
+                      backgroundColor: "#1f3d7a",
+                      border: "1px solid green",
+                      color: "white",
+                      fontSize: "13px",
+                      height: "40px",
+                      width: "100px",
+                    }}
+                  >
+                    Update
+                  </Button>
+                </TableCell>
+                <TableCell
+                  sx={{ borderRadius: 15, px: 0.3, py: 0.3 }}
+                  align="center"
+                >
+                  <Button
+                    sx={{
+                      backgroundColor: "#1f3d7a",
+                      border: "1px solid green",
+                      color: "white",
+                      fontSize: "13px",
+                      height: "40px",
+                      width: "100px",
+                    }}
+                  >
+                    Delete
+                  </Button>
                 </TableCell>
               </TableRow>
             ))}

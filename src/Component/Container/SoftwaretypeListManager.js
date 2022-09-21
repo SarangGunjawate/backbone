@@ -7,8 +7,10 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { deleteSoftwareType } from "../../Services/SoftwaretypeListService";
 import { UserActions } from "../../Utils/Helper";
+import WithLoader from '../HOC/WithLoader'
 
-function SoftwaretypeListManager() {
+function SoftwaretypeListManager(props) {
+  const {setLoading} = props;
   const dispatch = useDispatch();
   const getSoftTypeList = useSelector(getSoftwareTypeList);
   console.log("getSoftTypeList", getSoftTypeList);
@@ -33,16 +35,19 @@ function SoftwaretypeListManager() {
   };
 
   const handleSoftwareTypeDeletion = async (obj) => {
+    // setLoading(true);
     console.log("selectes user", obj);
     setSelectedUser(obj);
     try {
       const response = await deleteSoftwareType(obj.id);
+      setLoading(true);
       console.log("res", response);
       if (response.status === 200) {
         dispatch(fetchSoftwareTypeListDetails());
       }
     } catch (error) {
       console.log(error);
+      setLoading(false)
     }
   };
 
@@ -57,4 +62,4 @@ function SoftwaretypeListManager() {
   );
 }
 
-export default SoftwaretypeListManager;
+export default WithLoader(SoftwaretypeListManager);

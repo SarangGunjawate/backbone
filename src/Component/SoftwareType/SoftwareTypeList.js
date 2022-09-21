@@ -14,25 +14,17 @@ import {
   Button,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import {UserActions} from '../../Utils/Helper'
+import { UserActions } from "../../Utils/Helper";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 function SoftwareTypeList(props) {
+  const navigate = useNavigate()
   const { softTypeList, handleUserAction, selectedUser } = props;
   const list = Object.keys(softTypeList).map((key) => softTypeList[key]);
   const theme = useTheme();
-  // function handleRemove(id) {
-  //   axios.delete(`http://192.168.0.178:8000/Softwaretype/${id}`).then((res) => {
-  //     console.log(res);
-  //     console.log(res.data);
 
-  //     const obj = this.state.obj.filter((obj) => obj.id !== id);
-  //     this.setState({ obj });
-  //   });
-  //   alert("User Delete Successfully");
-  //   window.location.reload();
-  // }
   return (
     <Box
       sx={{
@@ -44,16 +36,40 @@ function SoftwareTypeList(props) {
         p: 2,
       }}
     >
-      <Typography
+      <Box
         sx={{
-          fontWeight: 600,
-          fontSize: 25,
-          py: theme.spacing(2),
-          color: "black",
+          display: "flex",
+          width: "100%",
+          alignItems: "center",
+          pt: 5,
         }}
       >
-        Software Type List
-      </Typography>
+        <Typography
+          sx={{
+            fontWeight: 600,
+            fontSize: 25,
+            py: theme.spacing(2),
+            color: "black",
+            marginLeft: '0px'
+          }}
+        >
+          Software Type List
+        </Typography>
+        <Button
+          onClick={() => {
+            navigate("/softwaretype");
+          }}
+          sx={{
+            textAlign: "center",
+            justifyContent: "center",
+            marginLeft: 'auto',
+            px: 3,
+          }}
+          variant="contained"
+        >
+          Add Software Type
+        </Button>
+      </Box>
       <TableContainer component={Paper}>
         <Table
           sx={{
@@ -140,33 +156,35 @@ function SoftwareTypeList(props) {
                 >
                   <Button
                     sx={{
-                        backgroundColor: '#1f3d7a',
-                        border: '1px solid green',
-                        color: 'white',
-                        fontSize: '13px',
-                        height: '40px',
-                        width: '100px'
+                      backgroundColor: "#1f3d7a",
+                      border: "1px solid green",
+                      color: "white",
+                      fontSize: "13px",
+                      height: "40px",
+                      width: "100px",
                     }}
-                  >Update</Button>
+                  >
+                    Update
+                  </Button>
                 </TableCell>
                 <TableCell
                   sx={{ borderRadius: 15, px: 0.3, py: 0.3 }}
                   align="center"
                 >
                   <Button
-                  onClick={() => handleUserAction(obj.id, UserActions.DELETE)}
-                  // onClick={() => handleRemove(obj.id)}
+                    onClick={() => handleUserAction(obj, UserActions.DELETE)}
+                    // onClick={() => handleRemove(obj.id)}
                     sx={{
-                        backgroundColor: '#1f3d7a',
-                        border: '1px solid green',
-                        color: 'white',
-                        fontSize: '13px',
-                        height: '40px',
-                        width: '100px'
+                      backgroundColor: "#1f3d7a",
+                      border: "1px solid green",
+                      color: "white",
+                      fontSize: "13px",
+                      height: "40px",
+                      width: "100px",
                     }}
-                    
                   >
-                    Delete</Button>
+                    Delete
+                  </Button>
                 </TableCell>
               </TableRow>
             ))}

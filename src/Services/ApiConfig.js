@@ -6,3 +6,4 @@ export const getSoftwareTypeURL = () => `${BaseURL}/Softwaretype/`;
 export const getSoftwareList = () => `${BaseURL}/software/`;
 export const getSoftwareDetailsURL = (userId) => `${BaseURL}/Softwaretype/${userId}`;
 export const getDeleteSoftTypeUrl = (id) => `${BaseURL}/Softwaretype/${id}/`;
+export const getSoftwaresubTypeURL = () => `${BaseURL}/SoftwreSubType/`;

@@ -164,9 +164,7 @@ function SoftwaretypForm(props) {
               }}
               variant="standard"
             >
-              <InputLabel shrink htmlFor="discription">
-                discription
-              </InputLabel>
+              
               <TextareaAutosize
                 id={"discription"}
                 maxRows={4}
@@ -183,7 +181,7 @@ function SoftwaretypForm(props) {
                   backgroundColor: "#1A202C",
                   resize: "vertical",
                   color: "#fff",
-                  border: errors.discription ? "1px solid red" : "none",
+                  border: errors.discription ? "1px solid red" : "1px solid gray",
                 }}
               />
               <FormHelperText error={errors.discription ? true : false}>

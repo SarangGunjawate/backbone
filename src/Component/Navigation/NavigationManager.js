@@ -29,6 +29,10 @@ const DRAWER_ITEMS = [
     title: "Software List",
     route: "/softwarelist",
   },
+  {
+    title: "Software SubType",
+    route: "/softwaresubtype",
+  },
 ];
 
 const openedMixin = (theme) => ({
