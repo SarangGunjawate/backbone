@@ -32,6 +32,7 @@ const axiosObj = {
   get: axiosInstance.get,
   post: (url, data, options) => axiosInstance.post(url, data, options),
   delete: axiosInstance.delete,
+  put: (url, data) => axiosInstance.put(url, data),
 };
 
 export default axiosObj;

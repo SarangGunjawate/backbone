@@ -1,4 +1,4 @@
-import { fetchSoftwareTypeList, getSoftwareTypeDetails } from "../../Services/SoftwaretypeListService";
+import { fetchSoftwareTypeList, getSoftwareTypeDetails, UpdateSoftwareType } from "../../Services/SoftwaretypeListService";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 const initialState = {
@@ -37,6 +37,23 @@ export const fetchSoftwareTypeListDetails = createAsyncThunk(
 //   }
 // );
 
+export const editSoftwareType = createAsyncThunk(
+  "/Softwaretype/edit_user_id",
+  async ({ userId, parameters }) => {
+    try {
+      const response = await UpdateSoftwareType(userId, parameters);
+      const resData = response.data;
+      if (response.status == 200) {
+        return resData;
+      } else {
+        return resData.error.message;
+      }
+    } catch (error) {
+      console.log('err', error);
+    }
+  }
+);
+
 export const softwareTypeListSlice = createSlice({
   name: "softwareType",
   initialState,
@@ -70,6 +87,36 @@ export const softwareTypeListSlice = createSlice({
       //   state.isLoading = false;
       //   state.usersList = [];
       // })
+
+      .addCase(editSoftwareType.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(editSoftwareType.fulfilled, (state, action) => {
+        // update existing record
+        state.isLoading = false;
+        const softwareDetails = action.payload.data.Softwaretype;
+
+        const updatedSoftType = {
+          name: softwareDetails.name,
+          discription: softwareDetails.discription,
+          created_by: softwareDetails.created_by,
+          updated_by: softwareDetails.updated_by,
+        };
+
+        const updatedValue = state.softwareTypelist.map((software, index) => {
+          if (software.id === softwareDetails.id) {
+            return { ...software, ...updatedSoftType };
+          } else {
+            return software;
+          }
+        });
+
+        state.softwareTypelist = updatedValue;
+        state.shouldShowRightPanel = false;
+      })
+      .addCase(editSoftwareType.rejected, (state) => {
+        state.isLoading = false;
+      });
   },
 });
 export const getSoftwareTypeList = (state) => state.softwareType.softwareTypelist;

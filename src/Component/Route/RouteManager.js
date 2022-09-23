@@ -1,4 +1,3 @@
-import { Dialog } from "@material-ui/core";
 import React from "react";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import ForgotPassword from "../Auth/ForgotPassword";

@@ -12,18 +12,35 @@ import {
   Avatar,
   TablePagination,
   Button,
+  FormControl,
+  OutlinedInput,
+  InputAdornment,
+  IconButton
 } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
 import { useTheme } from "@mui/material/styles";
 import { UserActions } from "../../Utils/Helper";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import Edit from "../Dialog/Edit";
 
 function SoftwareTypeList(props) {
   const navigate = useNavigate()
-  const { softTypeList, handleUserAction, selectedUser } = props;
+  const { softTypeList, handleUserAction } = props;
   const list = Object.keys(softTypeList).map((key) => softTypeList[key]);
   const theme = useTheme();
+  
+   const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+  
 
   return (
     <Box
@@ -55,20 +72,7 @@ function SoftwareTypeList(props) {
         >
           Software Type List
         </Typography>
-        <Button
-          onClick={() => {
-            navigate("/softwaretype");
-          }}
-          sx={{
-            textAlign: "center",
-            justifyContent: "center",
-            marginLeft: 'auto',
-            px: 3,
-          }}
-          variant="contained"
-        >
-          Add Software Type
-        </Button>
+        
       </Box>
       <TableContainer component={Paper}>
         <Table
@@ -103,6 +107,7 @@ function SoftwareTypeList(props) {
             </TableRow>
           </TableHead>
           <TableBody>
+            
             {list.map((obj) => (
               <TableRow
                 key={obj.id}
@@ -116,6 +121,7 @@ function SoftwareTypeList(props) {
                   border: "1px solid black",
                 }}
               >
+                
                 <TableCell
                   sx={{ borderRadius: 15, px: 0.3, py: 0.3 }}
                   align="center"
@@ -163,6 +169,7 @@ function SoftwareTypeList(props) {
                       height: "40px",
                       width: "100px",
                     }}
+                    onClick={()=>handleClickOpen()}
                   >
                     Update
                   </Button>
@@ -173,7 +180,6 @@ function SoftwareTypeList(props) {
                 >
                   <Button
                     onClick={() => handleUserAction(obj, UserActions.DELETE)}
-                    // onClick={() => handleRemove(obj.id)}
                     sx={{
                       backgroundColor: "#1f3d7a",
                       border: "1px solid green",
@@ -191,6 +197,10 @@ function SoftwareTypeList(props) {
           </TableBody>
         </Table>
       </TableContainer>
+      <Edit 
+        open={open}
+        handleClose={handleClose}
+      />
     </Box>
   );
 }
