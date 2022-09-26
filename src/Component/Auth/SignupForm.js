@@ -18,7 +18,7 @@ import { isValidEmail } from "../../Utils/Helper";
 import React, { useState } from "react";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 
-function SignupForm() {
+function SignupForm(props) {
   const navigate = useNavigate();
 
   const paperStyle = {
@@ -40,50 +40,68 @@ function SignupForm() {
   };
 
   const [inputValues, setInputValue] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    userName: "",
+    // firstName: "",
+    // lastName: "",
+    // email: "",
+    username: "",
     password: "",
-    confirmPassword: "",
-    agree: false,
+    // confirmPassword: "",
+    // agree: false,
   });
 
   const [errors, setError] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    userName: "",
+    // firstName: "",
+    // lastName: "",
+    // email: "",
+    username: "",
     password: "",
-    confirmPassword: "",
-    agree: "",
+    // confirmPassword: "",
+    // agree: "",
   });
+
+  const handleOnSubmit = (event) => {
+    event.preventDefault();
+    let validationErrors = {};
+    Object.keys(inputValues).forEach((name) => {
+      const error = validateForm(name, inputValues[name]);
+      if (error && error.length > 0) {
+        validationErrors[name] = error;
+      }
+    });
+    if (Object.keys(validationErrors).length > 0) {
+      setError({ ...errors, ...validationErrors });
+      return;
+    }
+
+    // Submit form
+    props.handleFormSubmit(inputValues);
+  };
 
   const validateForm = (name, value) => {
     switch (name) {
-      case "firstName":
-        if (!value || value.trim() === "") {
-          return "firstname is required";
-        } else {
-          return "";
-        }
+      // case "firstName":
+      //   if (!value || value.trim() === "") {
+      //     return "firstname is required";
+      //   } else {
+      //     return "";
+      //   }
 
-      case "lastName":
-        if (!value || value.trim() === "") {
-          return "lastname is required";
-        } else {
-          return "";
-        }
+      // case "lastName":
+      //   if (!value || value.trim() === "") {
+      //     return "lastname is required";
+      //   } else {
+      //     return "";
+      //   }
 
-      case "email":
-        if (!value) {
-          return "email is required";
-        } else if (!isValidEmail(value)) {
-          return "please enter valid email address";
-        } else {
-          return "";
-        }
-      case "userName":
+      // case "email":
+      //   if (!value) {
+      //     return "email is required";
+      //   } else if (!isValidEmail(value)) {
+      //     return "please enter valid email address";
+      //   } else {
+      //     return "";
+      //   }
+      case "username":
         if (!value || value.trim() === "") {
           return "username is required";
         } else {
@@ -97,21 +115,21 @@ function SignupForm() {
           return "";
         }
 
-      case "confirmPassword":
-        if (inputValues.password && value !== inputValues.password) {
-          return "Confirm password is not matched";
-        } else if (!value || value.trim() === "") {
-          return "please enter confirm password";
-        } else {
-          return "";
-        }
+      // case "confirmPassword":
+      //   if (inputValues.password && value !== inputValues.password) {
+      //     return "Confirm password is not matched";
+      //   } else if (!value || value.trim() === "") {
+      //     return "please enter confirm password";
+      //   } else {
+      //     return "";
+      //   }
 
-      case "agree":
-        if (!value) {
-          return "Please accept terms and conditions";
-        } else {
-          return "";
-        }
+      // case "agree":
+      //   if (!value) {
+      //     return "Please accept terms and conditions";
+      //   } else {
+      //     return "";
+      //   }
 
       default: {
         return "";
@@ -145,7 +163,7 @@ function SignupForm() {
             </Avatar>
             <h2>Sign up</h2>
           </Grid>
-          <TextField
+          {/* <TextField
             fullWidth
             id="standard-basic"
             label="first name"
@@ -185,7 +203,7 @@ function SignupForm() {
             helperText={errors.email}
             value={inputValues.email.value}
             error={errors.email ? true : false}
-          />
+          /> */}
           <TextField
             fullWidth
             id="standard-basic"
@@ -194,11 +212,11 @@ function SignupForm() {
             type="text"
             variant="standard"
             style={btnStyle}
-            name="userName"
+            name="username"
             onChange={handleOnChange}
-            helperText={errors.userName}
-            value={inputValues.userName.value}
-            error={errors.userName ? true : false}
+            helperText={errors.username}
+            value={inputValues.username.value}
+            error={errors.username ? true : false}
           />
           <TextField
             fullWidth
@@ -214,7 +232,7 @@ function SignupForm() {
             value={inputValues.password.value}
             error={errors.password ? true : false}
           />
-          <TextField
+          {/* <TextField
             fullWidth
             id="standard-basic"
             label="confirm password"
@@ -227,7 +245,7 @@ function SignupForm() {
             helperText={errors.confirmPassword}
             value={inputValues.confirmPassword.value}
             error={errors.confirmPassword ? true : false}
-          />
+          /> */}
 
           <Box component="div">
             <FormControl style={{ width: "100%" }} variant="standard">
@@ -287,7 +305,7 @@ function SignupForm() {
             variant="contained"
             style={btnStyle}
             fullWidth
-            onClick={handleClick}
+            onClick={handleOnSubmit}
           >
             Create Account
           </Button>

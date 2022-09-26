@@ -22,6 +22,7 @@ axiosInstance.interceptors.request.use(
     config.headers["Authorization"] = `Bearer ${token}`;
     config.headers['Content-Type'] = 'application/json,resonse_object.header("Access-Control-Allow-Origin", "*")';
     config.headers['Content-Type'] = 'application/json';
+    
     // config.headers('Access-Control-Allow-Headers', 'Content-Type');
     return config;
   },

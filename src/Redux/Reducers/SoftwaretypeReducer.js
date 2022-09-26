@@ -21,7 +21,7 @@ const initialState = {
 };
 
 export const fetchSoftwareTypeListDetails = createAsyncThunk(
-  "/Softwaretype/user_id",
+  "/software/Softwaretype/user_id",
   async () => {
     const response = await fetchSoftwareTypeList();
     console.log("res", response);

@@ -67,8 +67,6 @@ const SigninForm = (props) => {
         password: inputValues.Password.value,
       });
     }
-
-    // Call API
   };
 
   const validateForm = () => {

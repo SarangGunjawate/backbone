@@ -195,7 +195,7 @@ export default function Edit(props) {
               xs={12}
               sm={8}
               md={12}
-              sx={{ width: "100%" }}
+              sx={{ width: "100%", pr: 1 }}
             >
               <TextareaAutosize
                 id={"card-content"}

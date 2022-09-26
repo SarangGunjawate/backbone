@@ -6,8 +6,8 @@ import {
   getSoftwareTypeUpdateURL,
 } from "./ApiConfig";
 
-export const fetchSoftwareTypeList = () => {
-  return axiosInstance.get(getSoftwareTypeURL());
+export const fetchSoftwareTypeList = async() => {
+  return await axiosInstance.get(getSoftwareTypeURL());
 };
 
 export const deleteSoftwareType = async (UserID) => {

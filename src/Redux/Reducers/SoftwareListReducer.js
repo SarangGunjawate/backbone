@@ -11,7 +11,7 @@ const initialState = {
 };
 
 export const fetchSoftwareListDetails = createAsyncThunk(
-  "/Software",
+  "/software/software",
   async () => {
     const response = await fetchSoftwareList();
     console.log("res", response.data);
